@@ -1,0 +1,62 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.web-view {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+}
+
+.app,
+.app-root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.teams-sidebar {
+    width: 70px;
+    background-color: #262928;
+    text-align: center;
+}
+
+.team-btn {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.team-btn:hover {
+    cursor: pointer;
+}
+
+.team-btn:active,
+.team-btn:focus {
+    outline: none;
+}
+
+.team-btn:first-child {
+    margin-top: 6px;
+}
+
+.team-btn.selected {
+    border-color: #219eda;
+    color: #219eda;
+}
+
+.chat-panel:not(.visible) {
+    display: none;
+}

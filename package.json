@@ -1,0 +1,29 @@
+{
+  "name": "slacker-app",
+  "version": "0.1.0",
+  "description": "Unofficial Slack desktop client, with support for theming and addons",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "babel ui --out-dir dist",
+    "watch": "npm run build -- --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "slack",
+    "electron",
+    "messenger"
+  ],
+  "author": "Andrew Levine",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-plugin-transform-class-properties": "^6.10.2",
+    "babel-preset-react": "^6.5.0",
+    "classnames": "^2.2.5",
+    "electron-prebuilt": "^1.2.5",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  }
+}
