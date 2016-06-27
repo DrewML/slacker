@@ -6,13 +6,22 @@ const { BrowserWindow } = electron;
 module.exports = function(mainWindow) {
     function openLogin() {
         const loginWindow = new BrowserWindow({
-            width: 800,
-            height: 600,
+            width: 600,
+            height: 500,
             title: 'Slacker - Team Login'
         });
 
         loginWindow.loadURL('https://slack.com/signin');
+
         loginWindow.webContents.on('dom-ready', e => {
+            loginWindow.webContents.insertCSS(`
+                nav.top.persistent,
+                #page_contents > div.align_center,
+                footer {
+                    display: none
+                }
+            `);
+
             loginWindow.webContents.executeJavaScript(
                 'TS.boot_data.team_url;',
                 result => {

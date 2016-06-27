@@ -7,15 +7,14 @@ const { ipcRenderer } = require('electron');
 // TODO: Stop hardcoding and pull from config
 // TODO: Implement https://github.com/sindresorhus/electron-config
 const teamNames = [
-    'ausdevs',
-    'spredfast'
+    // 'ausdevs',
+    // 'spredfast'
 ];
 
 const actionList = {
     [LOGIN_SUCCESS]: ({ teamName }) => {
-        renderApp({
-            teamNames: [...teamNames, teamName]
-        });
+        teamNames.push(teamName);
+        renderApp({ teamNames });
     }
 };
 
