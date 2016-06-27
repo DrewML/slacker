@@ -1,12 +1,13 @@
 const electron = require('electron');
 const actionHandler = require('./action-handler');
+const { SLACKER } = require('./constants');
 
 const { BrowserWindow, ipcMain, app } = electron;
 
 // Prevent GC of window
 let win;
 
-ipcMain.on('slacker', (e, { action, payload }) => {
+ipcMain.on(SLACKER, (e, { action, payload }) => {
     actionHandler(win)[action](payload);
 });
 

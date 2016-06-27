@@ -1,6 +1,7 @@
 const App = require('./dist/ui/App');
 const React = require('react');
 const ReactDOM = require('react-dom');
+const { SLACKER, LOGIN_SUCCESS } = require('./constants');
 const { ipcRenderer } = require('electron');
 
 // TODO: Stop hardcoding and pull from config
@@ -11,14 +12,14 @@ const teamNames = [
 ];
 
 const actionList = {
-    loginSuccess({ teamName }) {
+    [LOGIN_SUCCESS]: ({ teamName }) => {
         renderApp({
             teamNames: [...teamNames, teamName]
         });
     }
 };
 
-ipcRenderer.on('slacker', (e, { action, payload }) => {
+ipcRenderer.on(SLACKER, (e, { action, payload }) => {
     actionList[action](payload);
 });
 

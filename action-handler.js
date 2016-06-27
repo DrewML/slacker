@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { SLACKER, OPEN_LOGIN, LOGIN_SUCCESS } = require('./constants');
 
 const { BrowserWindow } = electron;
 
@@ -18,8 +19,8 @@ module.exports = function(mainWindow) {
                     const pattern = /https?:\/\/([\w\d-]+)\.slack\.com\//;
                     const [, teamName] = result.match(pattern);
                     loginWindow.close();
-                    mainWindow.send('slacker', {
-                        action: 'loginSuccess',
+                    mainWindow.send(SLACKER, {
+                        action: LOGIN_SUCCESS,
                         payload: { teamName }
                     });
                 }
@@ -28,6 +29,6 @@ module.exports = function(mainWindow) {
     }
 
     return {
-        openLogin
+        [OPEN_LOGIN]: openLogin
     };
 };
