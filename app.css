@@ -21,9 +21,10 @@ body {
 }
 
 .teams-sidebar {
-    width: 70px;
+    width: 68px;
     background-color: #262928;
     text-align: center;
+    position: relative;
 }
 
 .team-btn {
@@ -44,7 +45,9 @@ body {
 }
 
 .team-btn:active,
-.team-btn:focus {
+.team-btn:focus,
+.add-team-btn:focus,
+.add-team-btn:active {
     outline: none;
 }
 
@@ -59,4 +62,21 @@ body {
 
 .chat-panel:not(.visible) {
     display: none;
+}
+
+.add-team-btn {
+    position: absolute;
+    left: 15px;
+    bottom: 9px;
+    background: none;
+    border: none;
+    color: #8E8E8E;
+    font-size: 41px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.add-team-btn:hover {
+    background-color: #373A39;
+    cursor: pointer;
 }

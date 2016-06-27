@@ -1,4 +1,5 @@
 const React = require('react');
+const login = require('../util/login');
 const TeamChat = require('./TeamChat');
 const TeamsSidebar = require('./TeamsSidebar');
 const classNames = require('classnames');
@@ -34,6 +35,10 @@ module.exports = class App extends Component {
         this.showTeam(teamName);
     };
 
+    onAddTeam = () => {
+        login();
+    };
+
     render() {
         const { teamNames } = this.props;
         const { selectedTeam } = this.state;
@@ -44,9 +49,11 @@ module.exports = class App extends Component {
                     teamNames={teamNames}
                     onTeamSelection={this.onTeamSelection}
                     selectedTeam={selectedTeam}
+                    onAddTeam={this.onAddTeam}
                 />
                 {teamNames.map(teamName =>
                     <TeamChat
+                        key={teamName}
                         teamName={teamName}
                         className={this.chatClasses(teamName)}
                     />

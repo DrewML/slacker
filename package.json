@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "babel ui --out-dir dist",
+    "build": "babel src --out-dir dist",
     "watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

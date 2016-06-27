@@ -1,11 +1,16 @@
 const electron = require('electron');
+const actionHandler = require('./action-handler');
 
-const { BrowserWindow, app } = electron;
+const { BrowserWindow, ipcMain, app } = electron;
 
 // Prevent GC of window
 let win;
 
-function createWindow() {
+ipcMain.on('slacker', (e, { action, payload }) => {
+    actionHandler(win)[action](payload);
+});
+
+function createMainWindow() {
     // Create the browser window.
     win = new BrowserWindow({
         width: 800,
@@ -23,14 +28,12 @@ function createWindow() {
     });
 }
 
-app.on('ready', createWindow);
+app.on('ready', createMainWindow);
 
 app.on('window-all-closed', () => {
     app.quit();
 });
 
 app.on('activate', () => {
-    if (win === null) {
-        createWindow();
-    }
+    if (!win) createMainWindow();
 });
