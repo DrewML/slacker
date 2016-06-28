@@ -30,6 +30,8 @@ module.exports = function(mainWindow) {
                     loginWindow.close();
                     mainWindow.send(SLACKER, {
                         action: LOGIN_SUCCESS,
+                        // TODO: Send team icon URI in payload.
+                        // Accessible via TS.model.team.icon
                         payload: { teamName }
                     });
                 }

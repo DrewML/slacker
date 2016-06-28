@@ -9,14 +9,22 @@ const { arrayOf, string } = PropTypes;
 
 module.exports = class App extends Component {
     static propTypes = {
-        teamNames: arrayOf(string).isRequired
+        teamNames: arrayOf(string).isRequired,
+        selectedTeam: string
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedTeam: props.teamNames[0]
+            selectedTeam: props.selectedTeam || props.teamNames[0]
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.selectedTeam) return;
+        this.setState({
+            selectedTeam: nextProps.selectedTeam
+        });
     }
 
     showTeam = teamName => {

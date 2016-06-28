@@ -1,8 +1,13 @@
 const electron = require('electron');
 const actionHandler = require('./action-handler');
-const { SLACKER } = require('./constants');
+const { SLACKER, SWITCH_TEAM_SHORTCUT } = require('./constants');
 
-const { BrowserWindow, ipcMain, app } = electron;
+const {
+    app,
+    ipcMain,
+    BrowserWindow,
+    globalShortcut
+} = electron;
 
 // Prevent GC of window
 let win;
@@ -10,6 +15,18 @@ let win;
 ipcMain.on(SLACKER, (e, { action, payload }) => {
     actionHandler(win)[action](payload);
 });
+
+function setupTeamSwitcherShortcuts(window) {
+    const nums = Array.from({ length: 9 }, (val, i) => i + 1);
+    nums.forEach(num => {
+        globalShortcut.register(`CommandOrControl+${num}`, () => {
+            window.send(SLACKER, {
+                action: SWITCH_TEAM_SHORTCUT,
+                payload: { index: num }
+            });
+        });
+    });
+}
 
 function createMainWindow() {
     // Create the browser window.
@@ -27,6 +44,8 @@ function createMainWindow() {
         // Allow GC of window
         win = null;
     });
+
+    setupTeamSwitcherShortcuts(win);
 }
 
 app.on('ready', createMainWindow);

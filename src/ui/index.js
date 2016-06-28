@@ -1,20 +1,27 @@
 const App = require('./dist/ui/App');
 const React = require('react');
 const ReactDOM = require('react-dom');
-const { SLACKER, LOGIN_SUCCESS } = require('./constants');
 const { ipcRenderer } = require('electron');
+const {
+    SLACKER,
+    LOGIN_SUCCESS,
+    SWITCH_TEAM_SHORTCUT
+} = require('./constants');
 
 // TODO: Stop hardcoding and pull from config
 // TODO: Implement https://github.com/sindresorhus/electron-config
-const teamNames = [
-    // 'ausdevs',
-    // 'spredfast'
-];
+const teamNames = [];
 
 const actionList = {
     [LOGIN_SUCCESS]: ({ teamName }) => {
         teamNames.push(teamName);
         renderApp({ teamNames });
+    },
+    [SWITCH_TEAM_SHORTCUT]: ({ index }) => {
+        renderApp({
+            teamNames,
+            selectedTeam: teamNames[index - 1]
+        });
     }
 };
 
