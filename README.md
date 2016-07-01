@@ -15,7 +15,6 @@ Unofficial [Slack](https://slack.com/) desktop client.
 4. Run `npm start` to launch the application
 
 ## TODO
-- Persist logged-in teams list
 - Fix bugs with notifications (only work sporadically)
 - Make notification settings configurable
 - Implement theming framework
