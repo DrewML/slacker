@@ -1,8 +1,8 @@
 const keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-    SLACKER: null,
-    LOGIN_SUCCESS: null,
-    OPEN_LOGIN: null,
-    SWITCH_TEAM_SHORTCUT: null
+    SLACKER: null, // message channel identifier
+    LOGIN_SUCCESS: null, // event
+    OPEN_LOGIN: null, // event
+    SWITCH_TEAM_SHORTCUT: null // event
 });

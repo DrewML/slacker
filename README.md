@@ -17,6 +17,7 @@ Unofficial [Slack](https://slack.com/) desktop client.
 ## TODO
 - Persist logged-in teams list
 - Fix bugs with notifications (only work sporadically)
+- Make notification settings configurable
 - Implement theming framework
 - Implement plugins framework
 - Test on platforms besides `OSX`

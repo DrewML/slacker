@@ -14,12 +14,17 @@ const config = new Config({
         teamList: []
     }
 });
-const teamNames = config.get('teamList');;
+const teamNames = config.get('teamList');
 const saveTeams = () => config.set('teamList', teamNames);
+
+const addNewTeam = teamName => {
+    if (teamNames.includes(teamNames)) return;
+    teamNames.push(teamName);
+};
 
 const actionList = {
     [LOGIN_SUCCESS]: ({ teamName }) => {
-        teamNames.push(teamName);
+        addNewTeam(teamName);
         renderApp({ teamNames });
         saveTeams();
     },
