@@ -1,39 +1,35 @@
-const App = require('./dist/ui/App');
+const App = require('./dist/ui/AppContainer');
+const appState = require('./dist/state');
 const React = require('react');
 const ReactDOM = require('react-dom');
+const { Provider } = require('react-redux');
+const { createStore } = require('redux');
 const { ipcRenderer } = require('electron');
 const Config = require('electron-config');
+const { actions } = require('./dist/state/teams');
 const {
     SLACKER,
     LOGIN_SUCCESS,
     SWITCH_TEAM_SHORTCUT
 } = require('./constants');
 
-const config = new Config({
-    defaults: {
-        teamList: []
-    }
-});
-const teamNames = config.get('teamList');
-const saveTeams = () => config.set('teamList', teamNames);
+const config = new Config();
+const previousState = config.get('appState');
 
-const addNewTeam = teamName => {
-    if (teamNames.includes(teamNames)) return;
-    teamNames.push(teamName);
-};
+const store = createStore(appState, previousState);
+store.subscribe(() => {
+    // TODO: Persist app state on app exit,
+    // rather than on any change
+    config.set('appState', store.getState());
+});
 
 const actionList = {
     [LOGIN_SUCCESS]: ({ teamName }) => {
-        addNewTeam(teamName);
-        renderApp({ teamNames });
-        saveTeams();
+        store.dispatch(actions.addTeam(teamName));
     },
     [SWITCH_TEAM_SHORTCUT]: ({ index }) => {
-        renderApp({
-            teamNames,
-            selectedTeam: teamNames[index - 1]
-        });
-        saveTeams();
+        const { teams: { teams }} = store.getState();
+        store.dispatch(actions.setSelectedTeam(teams[index - 1]));
     }
 };
 
@@ -41,11 +37,9 @@ ipcRenderer.on(SLACKER, (e, { action, payload }) => {
     actionList[action](payload);
 });
 
-function renderApp(props) {
-    ReactDOM.render(
-        <App {...props} />,
-        document.querySelector('.app')
-    );
-};
-
-renderApp({ teamNames });
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.querySelector('.app')
+);

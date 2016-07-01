@@ -5,42 +5,19 @@ const TeamsSidebar = require('./TeamsSidebar');
 const classNames = require('classnames');
 
 const { Component, PropTypes } = React;
-const { arrayOf, string } = PropTypes;
+const { arrayOf, string, func } = PropTypes;
 
 module.exports = class App extends Component {
     static propTypes = {
         teamNames: arrayOf(string).isRequired,
-        selectedTeam: string
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedTeam: props.selectedTeam || props.teamNames[0]
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.selectedTeam) return;
-        this.setState({
-            selectedTeam: nextProps.selectedTeam
-        });
-    }
-
-    showTeam = teamName => {
-        this.setState({
-            selectedTeam: teamName
-        });
+        selectedTeam: string,
+        setSelectedTeam: func.isRequired
     };
 
     chatClasses = teamName => {
         return classNames('chat-panel', {
-            visible: teamName === this.state.selectedTeam
+            visible: teamName === this.props.selectedTeam
         });
-    };
-
-    onTeamSelection = teamName => {
-        this.showTeam(teamName);
     };
 
     onAddTeam = () => {
@@ -48,14 +25,17 @@ module.exports = class App extends Component {
     };
 
     render() {
-        const { teamNames } = this.props;
-        const { selectedTeam } = this.state;
+        const {
+            teamNames,
+            selectedTeam,
+            setSelectedTeam
+        } = this.props;
 
         return (
             <div className='app-root'>
                 <TeamsSidebar
                     teamNames={teamNames}
-                    onTeamSelection={this.onTeamSelection}
+                    onTeamSelection={setSelectedTeam}
                     selectedTeam={selectedTeam}
                     onAddTeam={this.onAddTeam}
                 />

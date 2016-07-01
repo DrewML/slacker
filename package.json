@@ -20,14 +20,19 @@
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
     "babel-plugin-transform-class-properties": "^6.10.2",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-react": "^6.5.0",
     "classnames": "^2.2.5",
+    "electron-config": "^0.2.0",
     "electron-prebuilt": "^1.2.5",
     "keymirror": "^0.1.1",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
   },
   "dependencies": {
-    "electron-config": "^0.2.0"
+    "redux-actions": "^0.10.0",
+    "reselect": "^2.5.1"
   }
 }
